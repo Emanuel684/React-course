@@ -1,4 +1,4 @@
-import { getHeroeById } from './bases/08-imp-exp'
+import { getHeroeById } from './08-imp-exp';
 
 export const getHeroeByIdAsync = ( id ) => {
 
@@ -13,7 +13,7 @@ export const getHeroeByIdAsync = ( id ) => {
             } else {
                 reject( 'No se pudo encontrar el héroe' );
             }
-        }, 2000 )
+        }, 1500 )
     
     });
 

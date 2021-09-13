@@ -1,55 +1,38 @@
 import '@testing-library/jest-dom';
 
-import { getHeroeById, getHeroesByOwner } from '../../base/08-imp-exp';
+import { getHeroeByIdAsync } from '../../base/09-promesas';
 import heroes from '../../data/data';
 
-describe('Pruebas en el archivo 08-imo-exp.test.js', () => {
+describe('Pruebas en el archivo 09-promesas.test.js', () => {
 
     // Test getHeroeById retorna un heroe
-    test('Debe de retornar un heroe por id', () => {
+    test('Debe de retornar un Heroe async', ( done ) => {
 
         const id = 1;
-        const heroe = getHeroeById(id);
 
-        const heroeData = heroes.find(data => data.id === id);
+        getHeroeByIdAsync( id )
+                    .then( heroe => {
 
-        expect(heroe).toEqual(heroeData);
+                        expect( heroe ).toBe( heroes[0] );
+                        done();
+
+                    });
 
     });
 
-    // Test getHeroeById debe retornar undefined
-    test('Debe de retornar un undefined si Heroe no existe', () => {
-
+    test('Debe de obtener un error si el heroe por id no existe', (done) => {
+        
         const id = 10;
-        const heroe = getHeroeById(id);
+        getHeroeByIdAsync( id )
+                    .catch( err => {
 
-        expect(heroe).toBe( undefined );
+                        expect( err ).toBe('No se pudo encontrar el héroe');
+                        done();
 
-    });
-
-    // toEqual al arreglo filtrado
-    test('Debe de retornar un arreglo con los heroes de DC', () => {
-
-        const owner = 'DC';
-        const owners = getHeroesByOwner(owner);
-
-        const ownersData = heroes.filter(data => data.owner === owner);
-
-        expect(owners).toEqual(ownersData);
+                    })
 
     });
-
-    // length = 2
-    test('Debe de retornar un arreglo con los heroes de Marvel', () => {
-
-        const owner = 'Marvel';
-        const owners = getHeroesByOwner(owner);
-
-        const ownersData = heroes.filter(data => data.owner === owner);
-
-        expect(owners.length).toBe(ownersData.length);
-
-    });
-
+    
+ 
 });
 
