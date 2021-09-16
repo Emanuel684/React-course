@@ -15,7 +15,7 @@ const AddCategory = ({ setCategories }) => {
         console.log('Submit hecho')
 
         if (inputValue.trim().length > 2) {
-            setCategories(e => [...e, inputValue]);
+            setCategories(e => [ inputValue, ...e ]);
             setInputValue('');
         } else {
             console.log("inputValue vacido");
