@@ -13,33 +13,68 @@ describe('Pruebas en <GifGridItem />', () => {
     //     expect( getByText(saludo) ).toBeInTheDocument();
     // });
 
-    test('Debe de mostrar <GifGridItem /> correctamente', () => {
+    const title = 'Un titulo';
+    const url = 'https://localhost/algo.jpg';
 
-        const saludo = 'Hola, Soy Goku';
-        const wrapper = shallow(<GifGridItem saludo={saludo} />);
+    const wrapper = shallow(<GifGridItem title={title} url={url} />);
+
+
+    test('Debe de mostrar <GifGridItem /> correctamente', () => {
 
         expect(wrapper).toMatchSnapshot();
 
     });
 
-    test('Debe de mostrar el subtitulo enviado por props', () => {
+    test('Debe de tener un parrafo con el title', () => {
 
-        const saludo = 'Hola, Soy Goku';
-        const subTitulo = ' Soy un subtitulo ';
-        const wrapper = shallow(
-            <GifGridItem
-                saludo={saludo}
-                sutitulo={subTitulo}
-            />
-        );
+        const p = wrapper.find('p');
 
-        const textoParrafo = wrapper.find('p').text();
+        expect(p.text().trim()).toBe(title);
 
-        // console.log(textoParrafo);
+    });
 
-        expect(textoParrafo).toBe(subTitulo);
+    test('Debe de tener la imagen igual al url y alt de los props', () => {
+
+        const img = wrapper.find('img');
+
+        // console.log( img.props('src') );
+
+        expect(img.props().src).toBe(url);
+
+        expect(img.props().alt).toBe(title);
+
+    });
+
+    test('Debe de tener animate__fadeIn', () => {
+
+        const div = wrapper.find('div');
+
+        // console.log(div.props().className)
+
+        expect(div.props().className).toBe("card animate__animated animate__fadeIn");
 
     })
+
+
+
+    // test('Debe de mostrar el subtitulo enviado por props', () => {
+
+    //     const saludo = 'Hola, Soy Goku';
+    //     const subTitulo = ' Soy un subtitulo ';
+    //     const wrapper = shallow(
+    //         <GifGridItem
+    //             saludo={saludo}
+    //             sutitulo={subTitulo}
+    //         />
+    //     );
+
+    //     const textoParrafo = wrapper.find('p').text();
+
+    //     // console.log(textoParrafo);
+
+    //     expect(textoParrafo).toBe(subTitulo);
+
+    // })
 
 
 

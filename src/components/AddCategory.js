@@ -12,9 +12,16 @@ const AddCategory = ({ setCategories }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        console.log('Submit hecho')
+        console.log('Submit hecho');
 
-        if (inputValue.trim().length > 2) {
+        // if (inputValue.trim().length > 2) {
+        //     setCategories(e => [ inputValue, ...e ]);
+        //     setInputValue('');
+        // } else {
+        //     console.log("inputValue vacido");
+        // }
+
+        if (inputValue > 2) {
             setCategories(e => [ inputValue, ...e ]);
             setInputValue('');
         } else {
@@ -25,6 +32,7 @@ const AddCategory = ({ setCategories }) => {
 
     return (
         <form onSubmit={handleSubmit}>
+            <p> { inputValue } </p>
             <input
                 type="text"
                 value={inputValue}
