@@ -1,69 +1,58 @@
 import React from 'react';
-import AddCategory from "../../components/AddCategory";
+import GifGrid from "../../components/GifGrid";
 import '@testing-library/jest-dom';
 import { shallow } from 'enzyme';
+import { useFetchGifs } from '../../hooks/useFetchGifs';
+jest.mock('../../hooks/useFetchGifs');
 
 
+describe('Pruebas en <GifGrid />', () => {
 
-describe('Pruebas en <AddCategory />', () => {
+    const category = 'One Punch';
 
-    const setCategories = jest.fn();
 
-    let wrapper = shallow(<AddCategory setCategories={setCategories} />);
+    test('Debe de mostrar <GifGrid /> correctamente', () => {
 
-    beforeEach( () => {
-        jest.clearAllMocks();
-        wrapper = shallow(<AddCategory setCategories={setCategories} />);
-    });
+        useFetchGifs.mockReturnValue({
+            data: [],
+            loading: true
+        });
 
-    test('Debe de mostrar <AddCategory /> correctamente', () => {
+        const wrapper = shallow(<GifGrid category={category} />);
 
         expect(wrapper).toMatchSnapshot();
 
     });
 
-    test('Debe de cambiar la caja de texto', () => {
-
-        const input = wrapper.find('input');
-
-        const value = 'Hola Mundo';
-
-        // console.log(input.html());
-
-        input.simulate('change', { target: { value } });
-
-        const petiquet = wrapper.find('p');
-
-        expect( petiquet.text().trim() ).toBe( value );
-
-    });
-
-    test('No debe de postear la informacion con submit', () => {
+    test('Debe de mostrar items cuando se cargan imagenes useFetchGifs', () => {
         
-        wrapper.find('form').simulate('submit', { preventDefault(){} });
+        const gifs = [
+        {
+            id: 'ABC',
+            url: 'https://localhost/cualquier/cosa.jpg',
+            title: 'Cualquier cosa'
+        },
+        {
+            id: '123',
+            url: 'https://localhost/cualquier/cosa.jpg',
+            title: 'Cualquier cosa'
+        }
+    ]
 
-        expect( setCategories ).not.toHaveBeenCalled();
+        useFetchGifs.mockReturnValue({
+            data: gifs,
+            loading: false
+        });
+
+        const wrapper = shallow(<GifGrid category={category} />);
+
+        // expect( wrapper ).toMatchSnapshot();
+
+        expect( wrapper.find('p').exists() ).toBe(false);
+
+        expect( wrapper.find('GifGridItem').length ).toBe( gifs.length );
 
     });
     
-    test('Debe de llamar el setCategories y limpiar la caja de texto', () => {
-
-        const value = 'One Punch';
-
-        wrapper.find('input').simulate('change', { target: { value } });
-        
-        wrapper.find('form').simulate('submit', { preventDefault(){} });
-
-        // expect( setCategories ).toHaveBeenCalled();
-        // expect( setCategories ).toHaveBeenCalledTimes(1);
-        // expect( setCategories ).toHaveBeenCalledWith( expect.any(Function) );
-
-        wrapper.find('input').simulate('change', { target: '' });
-
-        // expect( wrapper.find('p').prop('value')).toBe('');
-
-    });
-    
-
 
 });
