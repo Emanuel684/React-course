@@ -20,6 +20,10 @@ const SimpleForm = () => {
         console.log('formState cambio.');
     }, [formState]);
 
+    useEffect(() => {
+        console.log('email cambio.');
+    }, [email]);
+
     const handleInputChange = ({ target }) => {
 
         setFormState({
