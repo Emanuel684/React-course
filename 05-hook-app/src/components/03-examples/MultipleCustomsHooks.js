@@ -2,7 +2,7 @@ import React from 'react';
 import { useFetch } from '../../hooks/useFetch';
 import { useCounter } from '../../hooks/useCounter';
 
-import './effects.css';
+import '../02-useEffect/effects.css';
 
 const MultipleCustomsHooks = () => {
 
@@ -10,7 +10,7 @@ const MultipleCustomsHooks = () => {
     console.log(state);
 
 
-    const { data, loading, error } = useFetch(`https://www.breakingbadapi.com/api/quotes/${state}`);
+    const { data, loading } = useFetch(`https://www.breakingbadapi.com/api/quotes/${state}`);
 
     // console.log(state);
     // console.log(loading);
