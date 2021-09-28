@@ -16,6 +16,8 @@ const AppRouter = () => {
         <Router>
             <div>
                 <NavBar />
+                
+                <div className="container">
                 <Switch>
 
                     <Route exact path="/about" component={AboutScreen} />
@@ -25,10 +27,11 @@ const AppRouter = () => {
                     <Route component={ HomeScreen } />
 
                 </Switch>
+                </div>
 
             </div>
         </Router>
     )
-}
+};
 
-export default AppRouter
+export default AppRouter;
