@@ -4,9 +4,11 @@ import { getImagen } from '../../base/11-async-await';
 
 describe('Pruebas en el archivo 11-async-await.test.js', () => {
 
-    test('Debe de retornar el URL de la imagen', ( done ) => {
+    test('Debe de retornar el URL de la imagen', async() => {
 
-        getImagen
+        const url = await getImagen();
+
+        expect( url.includes('https://') ).toBe( true );
 
     });
 

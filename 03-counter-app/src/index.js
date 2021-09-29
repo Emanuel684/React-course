@@ -16,3 +16,4 @@ const divRoot = document.querySelector('#root');
 // ReactDOM.render( <PrimeraApp saludo="Hola, Soy Goku" />, divRoot );
 // ReactDOM.render( <PrimeraApp saludo="Hola Mundo" />, divRoot );
 ReactDOM.render( <CounterApp value={ 0 } />, divRoot );
+// ReactDOM.render( <PrimeraApp saludo="Hola, Soy Goku" />, divRoot );
