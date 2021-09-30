@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Prueba del componente HooksApp Deberia de mostrarse de manera correcta 1`] = `
+<div>
+  <h1>
+    Hellow world!!
+  </h1>
+</div>
+`;
