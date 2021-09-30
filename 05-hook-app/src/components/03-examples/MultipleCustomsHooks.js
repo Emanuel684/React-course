@@ -7,7 +7,6 @@ import '../02-useEffect/effects.css';
 const MultipleCustomsHooks = () => {
 
     const { state, increment } = useCounter( 1 );
-    console.log(state);
 
 
     const { data, loading } = useFetch(`https://www.breakingbadapi.com/api/quotes/${state}`);
@@ -20,7 +19,7 @@ const MultipleCustomsHooks = () => {
 
     return (
         <div>
-            <h1>BreakingBad Quotes</h1>
+            <h1 id="breakingbad">BreakingBad Quotes</h1>
             <hr />
 
             {
